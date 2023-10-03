@@ -1,6 +1,7 @@
 package com.example.horoscapp.ui.horoscope.adapter
 
 import android.view.View
+import android.view.animation.LinearInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horoscapp.databinding.ItemHoroscopeBinding
 import com.example.horoscapp.domain.model.HoroscopeInfo
@@ -15,7 +16,18 @@ class HoroscopeViewHolder(view: View): RecyclerView.ViewHolder(view) {
       binding.tvTitle.text = context.getString(horoscopeInfo.name)
 
       binding.parent.setOnClickListener {
-          onItemSelected(horoscopeInfo)
+          startRotationAnimation(binding.ivHoroscope, newLambda = {onItemSelected(horoscopeInfo)})
+          //onItemSelected(horoscopeInfo)
+      }
+    }
+
+    fun startRotationAnimation(view: View, newLambda:() -> Unit){
+      view.animate().apply {
+          duration = 500
+          interpolator = LinearInterpolator() //flujo de la animación
+          rotationBy(360f)
+          withEndAction{newLambda()}
+          start()
       }
     }
 }

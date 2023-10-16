@@ -7,7 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.animation.DecelerateInterpolator
+import androidx.core.animation.doOnEnd
+import androidx.core.view.isVisible
 import com.example.horoscapp.R
 import com.example.horoscapp.databinding.FragmentHoroscopeBinding
 import com.example.horoscapp.databinding.FragmentLuckBinding
@@ -42,7 +46,25 @@ class LuckFragment : Fragment() {
         val animator = ObjectAnimator.ofFloat(binding.ivRoulette, View.ROTATION, 0f, degrees.toFloat())
         animator.duration = 2000
         animator.interpolator = DecelerateInterpolator()
+        animator.doOnEnd { slideCard() }
         animator.start()
+    }
+
+    private fun slideCard() {
+       val slideUpAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up)
+
+       slideUpAnimation.setAnimationListener(object : Animation.AnimationListener {
+           override fun onAnimationStart(animation: Animation?) {
+               binding.reverse.isVisible = true
+           }
+
+           override fun onAnimationEnd(animation: Animation?) {}
+
+           override fun onAnimationRepeat(animation: Animation?) {}
+       })
+
+        binding.reverse.startAnimation(slideUpAnimation)
+
     }
 
     override fun onCreateView(

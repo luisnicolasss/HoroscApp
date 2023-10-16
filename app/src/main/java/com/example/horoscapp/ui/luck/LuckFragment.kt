@@ -43,7 +43,8 @@ class LuckFragment : Fragment() {
         val random = Random()
         val degrees = random.nextInt(1440) + 360
 
-        val animator = ObjectAnimator.ofFloat(binding.ivRoulette, View.ROTATION, 0f, degrees.toFloat())
+        val animator =
+            ObjectAnimator.ofFloat(binding.ivRoulette, View.ROTATION, 0f, degrees.toFloat())
         animator.duration = 2000
         animator.interpolator = DecelerateInterpolator()
         animator.doOnEnd { slideCard() }
@@ -51,20 +52,39 @@ class LuckFragment : Fragment() {
     }
 
     private fun slideCard() {
-       val slideUpAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up)
+        val slideUpAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up)
 
-       slideUpAnimation.setAnimationListener(object : Animation.AnimationListener {
-           override fun onAnimationStart(animation: Animation?) {
-               binding.reverse.isVisible = true
-           }
+        slideUpAnimation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {
+                binding.reverse.isVisible = true
+            }
 
-           override fun onAnimationEnd(animation: Animation?) {}
+            override fun onAnimationEnd(animation: Animation?) {
+                growCard()
+            }
 
-           override fun onAnimationRepeat(animation: Animation?) {}
-       })
+            override fun onAnimationRepeat(animation: Animation?) {}
+        })
 
         binding.reverse.startAnimation(slideUpAnimation)
 
+    }
+
+    private fun growCard() {
+        val growAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.grow)
+
+        growAnimation.setAnimationListener(object : Animation.AnimationListener{
+            override fun onAnimationStart(animation: Animation?) {}
+
+            override fun onAnimationEnd(animation: Animation?) {
+
+            }
+
+            override fun onAnimationRepeat(animation: Animation?) {}
+
+        })
+
+        binding.reverse.startAnimation(growAnimation)
     }
 
     override fun onCreateView(

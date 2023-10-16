@@ -12,5 +12,5 @@ class AuthInterceptor @Inject constructor(private val tokenManager:TokenManager)
 }
 
 class TokenManager @Inject constructor() {
-   fun getToken(): String = "Suscríbete"
+   fun getToken(): String = "SUSCRIBETE"
 }

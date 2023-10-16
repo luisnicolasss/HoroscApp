@@ -11,6 +11,7 @@ import androidx.navigation.navArgs
 import com.example.horoscapp.R
 import com.example.horoscapp.databinding.ActivityDetailBinding
 import com.example.horoscapp.domain.model.HoroscopeModel
+import com.example.horoscapp.domain.model.HoroscopeModel.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -67,18 +68,18 @@ class HorocospeDetailActivity : AppCompatActivity() {
         binding.tvBody.text = state.prediction
 
         val image = when(state.horoscopeModel){
-            HoroscopeModel.Aries -> R.drawable.detail_aries
-            HoroscopeModel.Taurus -> R.drawable.detail_taurus
-            HoroscopeModel.Gemini -> R.drawable.detail_gemini
-            HoroscopeModel.Cancer -> R.drawable.detail_cancer
-            HoroscopeModel.Leo -> R.drawable.detail_leo
-            HoroscopeModel.Virgo -> R.drawable.detail_virgo
-            HoroscopeModel.Libra -> R.drawable.detail_libra
-            HoroscopeModel.Scorpio -> R.drawable.detail_scorpio
-            HoroscopeModel.Sagittarius -> R.drawable.detail_sagittarius
-            HoroscopeModel.Capricorn -> R.drawable.detail_capricorn
-            HoroscopeModel.Aquarius -> R.drawable.detail_aquarius
-            HoroscopeModel.Pisces -> R.drawable.detail_pisces
+            Aries -> R.drawable.detail_aries
+            Taurus -> R.drawable.detail_taurus
+            Gemini -> R.drawable.detail_gemini
+            Cancer -> R.drawable.detail_cancer
+            Leo -> R.drawable.detail_leo
+            Virgo -> R.drawable.detail_virgo
+            Libra -> R.drawable.detail_libra
+            Scorpio -> R.drawable.detail_scorpio
+            Sagittarius -> R.drawable.detail_sagittarius
+            Capricorn -> R.drawable.detail_capricorn
+            Aquarius -> R.drawable.detail_aquarius
+            Pisces -> R.drawable.detail_pisces
         }
 
         binding.ivDetail.setImageResource(image)

@@ -32,12 +32,15 @@ android {
             )
 
             resValue("string", "arisname", "HoroscApp")
+
             buildConfigField("String", "BASE_URL", "\"https://newastro.vercel.app/\"")
+            signingConfig = signingConfigs.getByName("debug")
+
         }
 
         getByName("debug"){
             isDebuggable = true
-            resValue("string", "arisname", " [DEBUG] HoroscApp")
+            resValue("string", "arisname", "[DEBUG] HoroscApp")
             buildConfigField("String", "BASE_URL", "\"https://newastro-debug.vercel.app/\"")
         }
     }

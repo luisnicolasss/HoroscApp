@@ -2,18 +2,17 @@ package com.example.horoscapp.ui.luck
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.view.FrameMetrics
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.DecelerateInterpolator
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import com.example.horoscapp.R
-import com.example.horoscapp.databinding.FragmentHoroscopeBinding
 import com.example.horoscapp.databinding.FragmentLuckBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Random
@@ -77,7 +76,8 @@ class LuckFragment : Fragment() {
             override fun onAnimationStart(animation: Animation?) {}
 
             override fun onAnimationEnd(animation: Animation?) {
-
+              binding.reverse.isVisible = false
+              showPremonitionView()
             }
 
             override fun onAnimationRepeat(animation: Animation?) {}
@@ -85,6 +85,29 @@ class LuckFragment : Fragment() {
         })
 
         binding.reverse.startAnimation(growAnimation)
+    }
+
+    private fun showPremonitionView() {
+        val dissappearAnimation = AlphaAnimation(1.0f, 0.0f)
+        dissappearAnimation.duration = 200
+
+        val appearAnimation = AlphaAnimation(0.0f, 1.0f)
+        appearAnimation.duration = 1000
+
+        dissappearAnimation.setAnimationListener(object : Animation.AnimationListener{
+            override fun onAnimationStart(animation: Animation?) {}
+
+            override fun onAnimationEnd(animation: Animation?) {
+                binding.preview.isVisible = false
+                binding.prediction.isVisible = true
+            }
+
+            override fun onAnimationRepeat(animation: Animation?) {}
+
+        })
+
+        binding.preview.startAnimation(dissappearAnimation)
+        binding.prediction.startAnimation(appearAnimation)
     }
 
     override fun onCreateView(
